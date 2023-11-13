@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact name="Charts:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Charts_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Charts.jar">
+        <element id="module-output" name="Charts" />
+      </element>
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.controlsfx:controlsfx:11.1.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:21-ea+24" />
+    </root>
+  </artifact>
+</component>
