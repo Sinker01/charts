@@ -20,9 +20,8 @@ public class BottleDrawing extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create a Canvas
-        Group group = new Group();
+        Group group = new Bottle();
 
-        drawBottle(group);
         // Create a Scene
         Scene scene = new Scene(group);
 
@@ -32,38 +31,6 @@ public class BottleDrawing extends Application {
 
         // Show the stage
         primaryStage.show();
-    }
-
-    private void drawBottle(Group gc) {
-
-        Polygon triangle = new Polygon();
-        triangle.getPoints().addAll(new Double[] {
-                600.0, 300.,
-                300., 800.,
-                900., 800.
-        });
-
-        Rectangle rectangle = new Rectangle(500, 200, 200, 400);
-
-        // Combine the triangle and rectangle using Shape::union
-        Shape combinedShape = Shape.union(triangle, rectangle);
-
-        LinearGradient gradient = new LinearGradient(100, 220, 100, 820, false, null,
-                new Stop(0, Color.WHITE),
-                new Stop(0.0, Color.WHITE),
-                new Stop(0.0, Color.GREEN),
-                new Stop(1, Color.RED));
-
-        combinedShape.setFill(gradient);
-
-        // Set the fill color
-
-        // Set stroke properties
-        combinedShape.setStroke(Color.BLACK);
-        combinedShape.setStrokeWidth(20);
-
-        // Add the combined shape to the group
-        gc.getChildren().add(combinedShape);
     }
 
     public static void main(String[] args) {
