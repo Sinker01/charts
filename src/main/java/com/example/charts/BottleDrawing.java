@@ -1,8 +1,12 @@
 package com.example.charts;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,17 +16,19 @@ public class BottleDrawing extends Application {
     private Bottle bottle = new Bottle();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         FileReader.init_config("flasche:");
         // Create a Canvas
 
+        endLoop();
 
-        bottle.setSoll(500);
-        bottle.setIst(200);
+        BorderPane pane  = new BorderPane(bottle);
 
+        // Center the bottle node within the anchorPane
+        //double centerX = (anchorPane.getPrefWidth() - bottle.getBoundsInLocal().getWidth()) / 2;
+        //double centerY = (anchorPane.getPrefHeight() - bottle.getBoundsInLocal().getHeight()) / 2;
 
-        // Create a Scene
-        Scene scene = new Scene(new BorderPane(bottle));
+        Scene scene = new Scene(pane);
 
         // Set the stage title and scene
         primaryStage.setTitle("Bottle Drawing");
@@ -34,21 +40,23 @@ public class BottleDrawing extends Application {
         primaryStage.show();
     }
 
-    private void endLoop() throws IOException {
-        FileReader reader = new FileReader(FileReader.pfad);
-        String[] result = reader.readLine().split(";");
+    private void endLoop() {
+        String[] result;
+        try (FileReader reader = new FileReader(FileReader.pfad)) {
+            result = reader.readLine().split(";");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 
-        bottle.setIst(Integer.parseInt(result[1]));
-        bottle.setSoll(Integer.parseInt(result[0]));
+        int soll = Integer.parseInt(result[0]), ist = Integer.parseInt(result[1]);
+        bottle.setSoll(soll);
+        bottle.setIst(ist);
 
         HelloApplication.delay(FileReader.intervall, ()->
                 {
-                    try {
                         endLoop();
-                    }
-                    catch (IOException e) {
-                        //FehlerDialog auswerfen
-                    }
                 }
         );
     }

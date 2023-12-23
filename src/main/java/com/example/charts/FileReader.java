@@ -16,8 +16,10 @@ public class FileReader extends BufferedReader{
         super(Files.newBufferedReader(Paths.get(input)));
     }
 
-    static void init_config(String name) throws IOException {
-        FileReader rd = new FileReader("files/config.ini");
+    static void init_config(String name) {
+        FileReader rd;
+        try {
+            rd = new FileReader("files/config.ini");
         int i = 0;
         for(String line = rd.readLine(); line != null; line = rd.readLine()) {
             if(line.isEmpty()) continue;
@@ -44,6 +46,11 @@ public class FileReader extends BufferedReader{
             }
         }
         if(i!=4 ) throw new IOException("Zu wenig Argumente in config.ini");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
     }
 
     public String readAll() throws IOException {
