@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.LinearGradient;
@@ -20,14 +21,19 @@ public class BottleDrawing extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create a Canvas
-        Group group = new Bottle();
+        Bottle bottle = new Bottle();
+        bottle.setSoll(500);
+        bottle.setIst(200);
+
 
         // Create a Scene
-        Scene scene = new Scene(group);
+        Scene scene = new Scene(new BorderPane(bottle));
 
         // Set the stage title and scene
         primaryStage.setTitle("Bottle Drawing");
         primaryStage.setScene(scene);
+
+        primaryStage.setFullScreen(true);
 
         // Show the stage
         primaryStage.show();
