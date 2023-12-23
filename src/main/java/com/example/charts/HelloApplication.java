@@ -11,22 +11,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class HelloApplication extends Application {
 
-    public String pfad;
-
-    public LocalTime start, ende;
-    public int intervall;
     private LineChart<String, Number> chart;
 
     private CategoryAxis xAxis;
 
     @Override
     public void start(Stage stage) throws IOException {
-        init_config();
+        FileReader.init_config("berg:");
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         // Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         xAxis = new CategoryAxis();
@@ -60,39 +55,9 @@ public class HelloApplication extends Application {
         launch(args);
     }
 
-    private void init_config() throws IOException {
-        FileReader rd = new FileReader("files/config.ini");
-        int i = 0;
-        for(String line = rd.readLine(); line != null; line = rd.readLine()) {
-            if(line.isEmpty()) continue;
-            i++;
-            String[] split = line.split(" ");
-            if(split.length!=2) throw new IOException("Linie " + i + " mit dem Inhalt " + line + " im config.ini falsch formatiert.");
-            switch (split[0]) {
-                case "Verz:":
-                    pfad = split[1];
-                    break;
-                case "Start:":
-                    start=LocalTime.parse(split[1]);
-                    break;
-                case "Ende:":
-                    ende = LocalTime.parse(split[1]);
-                    break;
-                case "Intervall:":
-                    intervall = Integer.parseInt(split[1]);
-                    break;
-                default:
-                    throw new IOException("Linie " + i + " mit dem Inhalt " + line + " im config.ini falsch formatiert.");
-            }
-        }
-        if(i!=4 ) throw new IOException("Zu wenig Argumente in config.ini");
-    }
-
-    private int z = 0;
     private void endLoop() throws IOException{
-        System.out.println(++z);
         refresh(chart);
-        delay(intervall, ()->
+        delay(FileReader.intervall, ()->
                 {
                     try {
                         endLoop();
@@ -137,7 +102,7 @@ public class HelloApplication extends Application {
     }
 
     private void readFile(LineChart<String, Number> chart, XYChart.Series<String, Number> series) throws IOException {
-        FileReader reader = new FileReader(pfad);
+        FileReader reader = new FileReader(FileReader.pfad);
         String line = reader.readLine();
         int i = 0;
         while( line!=null) {

@@ -1,27 +1,22 @@
 package com.example.charts;
 
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class BottleDrawing extends Application {
 
+    private Bottle bottle = new Bottle();
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        FileReader.init_config("flasche:");
         // Create a Canvas
-        Bottle bottle = new Bottle();
+
+
         bottle.setSoll(500);
         bottle.setIst(200);
 
@@ -37,6 +32,25 @@ public class BottleDrawing extends Application {
 
         // Show the stage
         primaryStage.show();
+    }
+
+    private void endLoop() throws IOException {
+        FileReader reader = new FileReader(FileReader.pfad);
+        String[] result = reader.readLine().split(";");
+
+        bottle.setIst(Integer.parseInt(result[1]));
+        bottle.setSoll(Integer.parseInt(result[0]));
+
+        HelloApplication.delay(FileReader.intervall, ()->
+                {
+                    try {
+                        endLoop();
+                    }
+                    catch (IOException e) {
+                        //FehlerDialog auswerfen
+                    }
+                }
+        );
     }
 
     public static void main(String[] args) {
