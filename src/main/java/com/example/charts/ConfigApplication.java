@@ -25,7 +25,10 @@ public abstract class ConfigApplication extends Application {
         }
 
         stage.setScene(createScene());
+        stage.setTitle(getTitle());
+        stage.setFullScreen(true);
         stage.show();
+
         try {
             delay_ms = Long.parseUnsignedLong(configReader.get("Intervall"));
         }
@@ -52,10 +55,7 @@ public abstract class ConfigApplication extends Application {
         new Thread(sleeper).start();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     protected abstract Scene createScene();
     protected abstract void refresh();
+    protected abstract String getTitle();
 }

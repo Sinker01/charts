@@ -12,7 +12,7 @@ public class BottleDrawing extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        MyFileReader.init_config("flasche:");
+        //MyFileReader.init_config("flasche:");
         // Create a Canvas
 
         endLoop();
@@ -36,6 +36,7 @@ public class BottleDrawing extends Application {
     }
 
     private void endLoop() {
+        /*
         String[] result;
         try (MyFileReader reader = new MyFileReader(MyFileReader.pfad)) {
             result = reader.readLine().split(";");
@@ -50,6 +51,7 @@ public class BottleDrawing extends Application {
         bottle.setIst(ist);
 
         HelloApplication.delay(MyFileReader.intervall, this::endLoop);
+        */
     }
 
     public static void main(String[] args) {

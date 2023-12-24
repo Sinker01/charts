@@ -21,44 +21,41 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class HelloApplication extends Application {
+public class HelloApplication extends ConfigApplication {
     public String pfad;
-
-    public LocalTime start;
-
-    public LocalTime ende;
-
-    public int intervall;
-
-    private static final int FONT_SIZE = 20;
-
     private AreaChart<String, Number> chart;
 
     private CategoryAxis xAxis;
 
-    public void start(Stage stage) throws IOException {
-        init_config();
+    public HelloApplication() {
+
         this.xAxis = new CategoryAxis();
         this.xAxis.tickLabelFontProperty().set(Font.font(20.0D));
+        this.xAxis.setAutoRanging(false);
+
         NumberAxis yAxis = new NumberAxis();
         yAxis.tickLabelFontProperty().set(Font.font(20.0D));
-        this.chart = new AreaChart((Axis)this.xAxis, (Axis)yAxis);
+
+        this.chart = new AreaChart<>(this.xAxis, yAxis);
         this.chart.setLegendVisible(false);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-        this.xAxis.setAutoRanging(false);
+    }
+
+    @Override
+    protected Scene createScene() {
         BorderPane pane = new BorderPane();
         pane.setCenter((Node)this.chart);
         Scene scene = new Scene((Parent)pane);
         scene.getStylesheets().add("style.css");
-        stage.setTitle("Berg");
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.setMaximized(true);
-        stage.show();
-        endLoop();
+        return scene;
     }
 
-    public void refresh(AreaChart<String, Number> chart) throws IOException {
+    @Override
+    protected String getTitle() {
+        return "Berg";
+    }
+
+    @Override
+    protected void refresh() {
         XYChart.Series<String, Number> series;
         if (chart.getData().size() == 0) {
             series = new XYChart.Series();
@@ -67,7 +64,11 @@ public class HelloApplication extends Application {
         } else {
             series = (XYChart.Series<String, Number>)chart.getData().get(0);
         }
-        readFile(chart, series);
+        try {
+            readFile(chart, series);
+        } catch (IOException e) {
+            new ExceptionDialog(e).show();
+        }
     }
 
     private void readFile(AreaChart<String, Number> chart, XYChart.Series<String, Number> series) throws IOException {
@@ -101,5 +102,11 @@ public class HelloApplication extends Application {
         } catch (NumberFormatException e) {
             throw new IOException(line + " entspricht nicht dem Format HH:MM;ZZZZ");
         }
+    }
+
+
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
