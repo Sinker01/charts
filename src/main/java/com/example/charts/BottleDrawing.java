@@ -46,7 +46,7 @@ public class BottleDrawing extends Application {
             result = reader.readLine().split(";");
         }
         catch (Exception e) {
-            e.printStackTrace();
+            new ExceptionDialog(e);
             return;
         }
 
@@ -54,11 +54,7 @@ public class BottleDrawing extends Application {
         bottle.setSoll(soll);
         bottle.setIst(ist);
 
-        HelloApplication.delay(FileReader.intervall, ()->
-                {
-                        endLoop();
-                }
-        );
+        HelloApplication.delay(FileReader.intervall, this::endLoop);
     }
 
     public static void main(String[] args) {

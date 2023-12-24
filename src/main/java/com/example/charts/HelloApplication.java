@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FileReader.init_config("berg:");
+        FileReader.init_config("Berg:");
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         // Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         xAxis = new CategoryAxis();
