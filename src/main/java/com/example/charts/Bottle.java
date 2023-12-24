@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 public class Bottle extends Group {
     private final Shape clone;
     private int ist=100, soll=100;
-    private Label istLabel = new Label(Integer.toString(ist)),
+    private final Label istLabel = new Label(Integer.toString(ist)),
     sollLabel = new Label(Integer.toString(soll));
 
     public Bottle() {
@@ -73,7 +73,7 @@ public class Bottle extends Group {
     public void setSoll(int soll) {
         this.soll=soll;
         setPercent();
-        sollLabel.setText("Soll:\t"  + Integer.toString(soll));
+        sollLabel.setText("Soll:\t"  + soll);
     }
 
     public void setIst(int ist) {
@@ -86,6 +86,6 @@ public class Bottle extends Group {
 
         istLabel.setTranslateX(x);
         istLabel.setTranslateY(y);
-        istLabel.setText("Ist:\t" + Integer.toString(ist));
+        istLabel.setText("Ist:\t" + ist);
     }
 }

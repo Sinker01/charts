@@ -1,44 +1,23 @@
 package com.example.charts;
 
 import com.example.charts.files.MyFileReader;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-public class BottleDrawing extends Application {
+public class BottleDrawing extends ConfigApplication {
 
-    private Bottle bottle = new Bottle();
+    private final Bottle bottle = new Bottle();
 
     @Override
-    public void start(Stage primaryStage) {
-        //MyFileReader.init_config("flasche:");
-        // Create a Canvas
-
-        endLoop();
-
+    protected Scene createScene() {
         BorderPane pane  = new BorderPane(bottle);
-
-        // Center the bottle node within the anchorPane
-        //double centerX = (anchorPane.getPrefWidth() - bottle.getBoundsInLocal().getWidth()) / 2;
-        //double centerY = (anchorPane.getPrefHeight() - bottle.getBoundsInLocal().getHeight()) / 2;
-
-        Scene scene = new Scene(pane);
-
-        // Set the stage title and scene
-        primaryStage.setTitle("Bottle Drawing");
-        primaryStage.setScene(scene);
-
-        primaryStage.setFullScreen(true);
-
-        // Show the stage
-        primaryStage.show();
+        return new Scene(pane);
     }
 
-    private void endLoop() {
-        /*
+    @Override
+    protected void refresh() {
         String[] result;
-        try (MyFileReader reader = new MyFileReader(MyFileReader.pfad)) {
+        try (MyFileReader reader = new MyFileReader(configReader.get("Flasche"))) {
             result = reader.readLine().split(";");
         }
         catch (Exception e) {
@@ -49,9 +28,11 @@ public class BottleDrawing extends Application {
         int soll = Integer.parseInt(result[0]), ist = Integer.parseInt(result[1]);
         bottle.setSoll(soll);
         bottle.setIst(ist);
+    }
 
-        HelloApplication.delay(MyFileReader.intervall, this::endLoop);
-        */
+    @Override
+    protected String getTitle() {
+        return "Flasche";
     }
 
     public static void main(String[] args) {
