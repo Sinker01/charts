@@ -14,7 +14,7 @@ public class ConfigReader extends HashMap<String, String> {
         this.file = file;
         int line_count = 0;
         try (MyFileReader rd = new MyFileReader(file)) {
-            for (String line = rd.readLine(); line != null; line = rd.readLine()) {
+            for (String line: rd) {
                 line_count++;
                 if (line.isEmpty()) continue;
 
