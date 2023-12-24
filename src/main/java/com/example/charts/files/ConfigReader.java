@@ -6,6 +6,10 @@ import java.util.HashMap;
 public class ConfigReader extends HashMap<String, String> {
     private final String file;
 
+    public ConfigReader() throws IOException {
+        this("config.ini");
+    }
+
     public ConfigReader(String file) throws IOException {
         this.file = file;
         int line_count = 0;
@@ -24,7 +28,7 @@ public class ConfigReader extends HashMap<String, String> {
     }
 
     @Override
-    public String get(Object key) {
+    public String get(Object key) throws IllegalArgumentException {
         if(!super.containsKey(key))
             throw new IllegalArgumentException("Argument " + key + " in " + file + " not Found");
 

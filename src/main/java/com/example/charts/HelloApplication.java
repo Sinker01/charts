@@ -3,9 +3,11 @@ package com.example.charts;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import com.example.charts.files.ConfigReader;
+import com.example.charts.files.MyFileReader;
 import javafx.application.Application;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +16,7 @@ import javafx.scene.chart.Axis;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -55,68 +58,6 @@ public class HelloApplication extends Application {
         endLoop();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    private void init_config() throws IOException {
-        FileReader rd = new FileReader("files/config.ini");
-        int i = 0;
-        for (String line = rd.readLine(); line != null; line = rd.readLine()) {
-            if (!line.isEmpty()) {
-                i++;
-                String[] split = line.split(" ");
-                if (split.length != 2)
-                    throw new IOException("Linie " + i + " mit dem Inhalt " + line + " im config.ini falsch formatiert.");
-                switch (split[0]) {
-                    case "Verz:":
-                        this.pfad = split[1];
-                        break;
-                    case "Start:":
-                        this.start = LocalTime.parse(split[1]);
-                        break;
-                    case "Ende:":
-                        this.ende = LocalTime.parse(split[1]);
-                        break;
-                    case "Intervall:":
-                        this.intervall = Integer.parseInt(split[1]);
-                        break;
-                    default:
-                        //throw new IOException("Linie " + i + " mit dem Inhalt " + line + " im config.ini falsch formatiert.");
-                        i--;
-                }
-            }
-        }
-        if (i != 4)
-            throw new IOException("Zu wenig Argumente in config.ini");
-    }
-
-    private int z = 0;
-
-    private void endLoop() throws IOException {
-        refresh(this.chart);
-        delay(this.intervall, () -> {
-            try {
-                endLoop();
-            } catch (IOException iOException) {}
-        });
-    }
-
-    public static void delay(final long millis, Runnable continuation) {
-        Task<Void> sleeper = new Task<Void>() {
-            protected Void call() throws Exception {
-                try {
-                    Thread.sleep(millis);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        };
-        sleeper.setOnSucceeded(event -> continuation.run());
-        (new Thread((Runnable)sleeper)).start();
-    }
-
     public void refresh(AreaChart<String, Number> chart) throws IOException {
         XYChart.Series<String, Number> series;
         if (chart.getData().size() == 0) {
@@ -130,7 +71,7 @@ public class HelloApplication extends Application {
     }
 
     private void readFile(AreaChart<String, Number> chart, XYChart.Series<String, Number> series) throws IOException {
-        FileReader reader = new FileReader(this.pfad);
+        MyFileReader reader = new MyFileReader(this.pfad);
         String line = reader.readLine();
         int i = 0;
         while (line != null) {

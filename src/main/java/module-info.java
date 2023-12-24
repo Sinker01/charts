@@ -7,4 +7,6 @@ module com.example.charts {
 
     opens com.example.charts to javafx.fxml;
     exports com.example.charts;
+    exports com.example.charts.files;
+    opens com.example.charts.files to javafx.fxml;
 }

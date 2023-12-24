@@ -15,11 +15,11 @@ public class ExceptionDialog extends Alert {
         this(ex, debug);
     }
     
-    public ExceptionDialog(Throwable ex, String debug) {
+    public ExceptionDialog(Throwable ex, String text) {
         super(Alert.AlertType.ERROR);
 
         super.setTitle("Exception Dialog");
-        if(debug!=null) super.setHeaderText(debug);
+        if(text!=null) super.setHeaderText(text);
         super.setContentText(ex.getMessage());
 
         // Create expandable Exception.
@@ -28,7 +28,7 @@ public class ExceptionDialog extends Alert {
         ex.printStackTrace(pw);
         String exceptionText = sw.toString();
 
-        Label label = new Label("The exception stacktrace was: " + debug);
+        Label label = new Label("The exception stacktrace was: " + text);
 
         TextArea textArea = new TextArea(exceptionText);
         textArea.setEditable(false);
@@ -46,7 +46,5 @@ public class ExceptionDialog extends Alert {
 
 // Set expandable Exception into the dialog pane.
         super.getDialogPane().setExpandableContent(expContent);
-
-        super.showAndWait();
     }
 }

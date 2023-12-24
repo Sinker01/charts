@@ -1,15 +1,10 @@
 package com.example.charts;
 
+import com.example.charts.files.MyFileReader;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class BottleDrawing extends Application {
 
@@ -17,7 +12,7 @@ public class BottleDrawing extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FileReader.init_config("flasche:");
+        MyFileReader.init_config("flasche:");
         // Create a Canvas
 
         endLoop();
@@ -42,7 +37,7 @@ public class BottleDrawing extends Application {
 
     private void endLoop() {
         String[] result;
-        try (FileReader reader = new FileReader(FileReader.pfad)) {
+        try (MyFileReader reader = new MyFileReader(MyFileReader.pfad)) {
             result = reader.readLine().split(";");
         }
         catch (Exception e) {
@@ -54,7 +49,7 @@ public class BottleDrawing extends Application {
         bottle.setSoll(soll);
         bottle.setIst(ist);
 
-        HelloApplication.delay(FileReader.intervall, this::endLoop);
+        HelloApplication.delay(MyFileReader.intervall, this::endLoop);
     }
 
     public static void main(String[] args) {
