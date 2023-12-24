@@ -20,7 +20,7 @@ public class FileReader extends BufferedReader{
     static void init_config(String name) {
         FileReader rd;
         try {
-            rd = new FileReader("../config.ini");
+            rd = new FileReader("files/config.ini");
         int i = 0;
         for(String line = rd.readLine(); line != null; line = rd.readLine()) {
             if(line.isEmpty()) continue;
@@ -40,7 +40,7 @@ public class FileReader extends BufferedReader{
                 default:
                     if(name.equals("Verz:")) {
                         //pfad = split[1];
-                        pfad = "../flasche.csv";
+                        pfad = "files/berg.csv";
                         break;
                     }
                     i--;
