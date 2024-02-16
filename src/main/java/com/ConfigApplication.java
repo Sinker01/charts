@@ -1,6 +1,6 @@
-package com.example.charts;
+package com;
 
-import com.example.charts.files.ConfigReader;
+import com.files.ConfigReader;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;

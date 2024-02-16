@@ -1,4 +1,4 @@
-package com.example.charts;
+package com;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;

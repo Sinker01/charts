@@ -1,8 +1,8 @@
-package com.example.charts;
+package com;
 
 import java.io.IOException;
 
-import com.example.charts.files.MyFileReader;
+import com.files.MyFileReader;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
@@ -11,14 +11,14 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
-public class HelloApplication extends ConfigApplication {
+public class GraphikApplication extends ConfigApplication {
     private final AreaChart<String, Number> chart;
 
     private final CategoryAxis xAxis;
 
     private final XYChart.Series<String, Number> series;
 
-    public HelloApplication() {
+    public GraphikApplication() {
 
         this.xAxis = new CategoryAxis();
         this.xAxis.tickLabelFontProperty().set(Font.font(20.0D));

@@ -1,4 +1,4 @@
-package com.example.charts.files;
+package com.files;
 
 import java.io.*;
 import java.nio.file.Files;

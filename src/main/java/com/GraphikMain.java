@@ -1,8 +1,8 @@
-package com.example.charts;
+package com;
 
-public class BottleDrawingMain {
+public class GraphikMain {
     public static void main(String[] args) {
-        BottleDrawing.main(args);
+        GraphikApplication.main(args);
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> new ExceptionDialog(e).showAndWait());
     }

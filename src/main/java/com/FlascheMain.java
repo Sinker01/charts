@@ -1,8 +1,8 @@
-package com.example.charts;
+package com;
 
-public class BergMain {
+public class FlascheMain {
     public static void main(String[] args) {
-        HelloApplication.main(args);
+        FlascheApplication.main(args);
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> new ExceptionDialog(e).showAndWait());
     }

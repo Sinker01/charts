@@ -1,10 +1,10 @@
-package com.example.charts;
+package com;
 
-import com.example.charts.files.MyFileReader;
+import com.files.MyFileReader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
-public class BottleDrawing extends ConfigApplication {
+public class FlascheApplication extends ConfigApplication {
 
     private final Bottle bottle = new Bottle();
 
