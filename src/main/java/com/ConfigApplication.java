@@ -39,6 +39,9 @@ public abstract class ConfigApplication extends Application {
         endLoop();
     }
 
+    /**
+     * Geht in eine endlos-Schleife und ruft alle paar ms, welche in der Config zu definieren sind, {@link #refresh()} auf
+     */
     private void endLoop()  {
         refresh();
         Task<Void> sleeper = new Task<>() {
@@ -55,7 +58,15 @@ public abstract class ConfigApplication extends Application {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Verlangt die Erstellung einer Scene mit den jeweiligen Inhalten
+     * @return Eine Szene mit den darzustellenden Inhalten
+     */
     protected abstract Scene createScene();
+
+    /**
+     * Verlangt die Definition einer Methode, in welcher das Dargestellte aktualisiert wird
+     */
     protected abstract void refresh();
     protected abstract String getTitle();
 }

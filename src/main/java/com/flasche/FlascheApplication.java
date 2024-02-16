@@ -1,5 +1,7 @@
-package com;
+package com.flasche;
 
+import com.ConfigApplication;
+import com.ExceptionDialog;
 import com.files.MyFileReader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

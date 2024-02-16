@@ -1,8 +1,10 @@
-package com;
+package com.graph;
 
-public class FlascheMain {
+import com.ExceptionDialog;
+
+public class GraphikMain {
     public static void main(String[] args) {
-        FlascheApplication.main(args);
+        GraphikApplication.main(args);
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> new ExceptionDialog(e).showAndWait());
     }

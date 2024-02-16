@@ -9,4 +9,8 @@ module com {
     exports com;
     exports com.files;
     opens com.files to javafx.fxml;
+    exports com.graph;
+    opens com.graph to javafx.fxml;
+    exports com.flasche;
+    opens com.flasche to javafx.fxml;
 }

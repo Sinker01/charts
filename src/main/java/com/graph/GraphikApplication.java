@@ -1,7 +1,9 @@
-package com;
+package com.graph;
 
 import java.io.IOException;
 
+import com.ConfigApplication;
+import com.ExceptionDialog;
 import com.files.MyFileReader;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;

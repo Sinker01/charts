@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
+/**
+ * Klasse zum Lesen von Dateien. Über die einzelnen Zeilen können iteriert werden.
+ */
 public class MyFileReader extends BufferedReader implements Iterable<String>{
 
     public MyFileReader(String input) throws IOException {

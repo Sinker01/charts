@@ -1,4 +1,4 @@
-package com;
+package com.flasche;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -10,12 +10,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 
+/**
+ * Klasse zum Erstellen der Flasche.
+ * <p>Die klasse erzeugt eine Flasche mit Farbverlauf, welche je nach eingestellter Füllhöhe nicht ganz zu sehen ist.
+ * Dies wird intern verwirklicht, indem zwei Flaschen erstellt werden;
+ * eine im Hintergrund mit dem Farbverlauf, und eine davor welche weiß ist und die farbige in teilen überdeckt.</p>
+ */
 public class Bottle extends Group {
-    private final Shape clone;
+    private final Shape clone; //Eine zweite Flasche, um die erste in Teilen abzudecken
     private int ist=100, soll=100;
     private final Label istLabel = new Label(Integer.toString(ist)),
     sollLabel = new Label(Integer.toString(soll));
 
+    /**
+     * Erstellt die Flasche
+     */
     public Bottle() {
         Polygon triangle = new Polygon();
         triangle.getPoints().addAll(310., 100.,
@@ -43,8 +52,6 @@ public class Bottle extends Group {
         combinedShape.setFill(gradient);
         istLabel.setTextFill(Color.BLUE);
 
-        // Set the fill color
-
         // Set stroke properties
         combinedShape.setStroke(Color.BLACK);
         combinedShape.setStrokeWidth(20);
@@ -59,6 +66,9 @@ public class Bottle extends Group {
         super.getChildren().add(istLabel);
     }
 
+    /**
+     * Aktualisiert den sichtbaren Farbverlauf
+     */
     private void setPercent() {
         double d = (double) ist/soll;
         LinearGradient fill = new LinearGradient(100, 20, 100, 620, false, null,
@@ -79,6 +89,8 @@ public class Bottle extends Group {
     public void setIst(int ist) {
         this.ist = ist;
         setPercent();
+
+        //Kalkuliere, wo das ist-label sein muss
         double d = (double) ist/soll;
         double y = 570 - (d) * 570;
         double x = 500;

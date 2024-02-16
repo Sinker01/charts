@@ -9,6 +9,9 @@ import javafx.scene.layout.Priority;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * Klasse, um eine Exception als Dialog auszuwerfen
+ */
 public class ExceptionDialog extends Alert {
     static String debug = null;
     public ExceptionDialog(Throwable ex) {
