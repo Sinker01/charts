@@ -1,4 +1,4 @@
-package com.files;
+package sit.app.factory.charts.files;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class ConfigReader {
     public ConfigReader(String file) throws IOException, IllegalArgumentException {
         this.file = file;
         int line_count = 0; //Zähle aus Debug-Zwecken die Linien mit
-        try (MyFileReader rd = new MyFileReader(file)) {
+        try (IterableFileReader rd = new IterableFileReader(file)) {
             for (String line: rd) {
                 line_count++;
                 if (line.isEmpty()) continue; //Leere Zeilen in der Config-Datei sind erlaubt

@@ -1,10 +1,10 @@
-package com.graph;
+package sit.app.factory.charts;
 
 import java.io.IOException;
 
-import com.ConfigApplication;
-import com.ExceptionDialog;
-import com.files.MyFileReader;
+import sit.app.factory.charts.config.ConfigApplication;
+import sit.app.factory.charts.config.ExceptionDialog;
+import sit.app.factory.charts.files.IterableFileReader;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
@@ -13,14 +13,14 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
-public class GraphikApplication extends ConfigApplication {
+public class GraphApplication extends ConfigApplication {
     private final AreaChart<String, Number> chart;
 
     private final CategoryAxis xAxis;
 
     private final XYChart.Series<String, Number> series;
 
-    public GraphikApplication() {
+    public GraphApplication() {
 
         this.xAxis = new CategoryAxis();
         this.xAxis.tickLabelFontProperty().set(Font.font(20.0D));
@@ -64,7 +64,7 @@ public class GraphikApplication extends ConfigApplication {
     }
 
     private void readFile(XYChart.Series<String, Number> series) throws IOException {
-        try (MyFileReader reader = new MyFileReader(configReader.get("Berg"))) {
+        try (IterableFileReader reader = new IterableFileReader(configReader.get("Berg"))) {
             for (String line: reader) {
                 if(line.isEmpty()) continue;
 
@@ -89,6 +89,7 @@ public class GraphikApplication extends ConfigApplication {
     }
 
     public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> new ExceptionDialog(e).showAndWait());
         launch(args);
     }
 }

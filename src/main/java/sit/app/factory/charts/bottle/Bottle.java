@@ -1,4 +1,4 @@
-package com.flasche;
+package sit.app.factory.charts.bottle;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;

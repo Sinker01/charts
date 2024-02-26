@@ -1,6 +1,6 @@
-package com;
+package sit.app.factory.charts.config;
 
-import com.files.ConfigReader;
+import sit.app.factory.charts.files.ConfigReader;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;

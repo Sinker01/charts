@@ -1,4 +1,4 @@
-package com.files;
+package sit.app.factory.charts.files;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -8,9 +8,9 @@ import java.util.Iterator;
 /**
  * Klasse zum Lesen von Dateien. Über die einzelnen Zeilen können iteriert werden.
  */
-public class MyFileReader extends BufferedReader implements Iterable<String>{
+public class IterableFileReader extends BufferedReader implements Iterable<String>{
 
-    public MyFileReader(String input) throws IOException {
+    public IterableFileReader(String input) throws IOException {
         super(Files.newBufferedReader(Paths.get(input)));
     }
 

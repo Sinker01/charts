@@ -1,4 +1,4 @@
-package com;
+package sit.app.factory.charts.config;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
