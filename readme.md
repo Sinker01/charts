@@ -30,3 +30,5 @@ Die Datei für die Flasche sollte in folgendem Format angegeben werden:
 ```
 [soll-Wert];[ist-Wert]
 ```
+
+Es sollte durch ein externes System sichergestellt werden, dass die beiden oberen Dateien regelmäßig aktualisiert werden.
