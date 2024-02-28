@@ -15,7 +15,7 @@ import static java.lang.Math.sqrt;
 
 /**
  * Klasse zum Erstellen der Flasche.
- * <p>Die klasse erzeugt eine Flasche mit Farbverlauf, welche je nach eingestellter Füllhöhe nicht ganz zu sehen ist.
+ * <p>Die Klasse erzeugt eine Flasche mit Farbverlauf, welche je nach eingestellter Füllhöhe nicht ganz zu sehen ist.
  * Dies wird intern verwirklicht, indem zwei Flaschen erstellt werden;
  * eine im Hintergrund mit dem Farbverlauf, und eine davor welche weiß ist und die farbige in teilen überdeckt.</p>
  */
@@ -37,6 +37,13 @@ public class Bottle extends Group {
 
     /**
      * Erstellt die Flasche
+     * @param xRect der x-Wert des Rechtecks. Es ist die obere linke Ecke gemeint. Durch das untere Trapez kann auch links vom x-Wert eine Fläche sein.
+     * @param yRect der y-Wert des Rechtecks. Es ist die obere Kante gemeint.
+     * @param widthRect Die Breite des Rechtecks
+     * @param heightRect Die Höhe des Rechtecks
+     * @param widthTrap Die zusätzliche Breite des Trapezes verglichen mit dem Rechteck. Die Länge der unteren Kante des Rechtecks ist widthRect+2*widthTrap
+     * @param heightTrap Die Höhe des Trapezes
+     * @param stroke Die Breite des schwarzen Rahmens. Er wird außerhalb der Flasche erzeugt, also noch über den x- und y-Wert
      */
     public Bottle(double xRect, double yRect, double widthRect, double heightRect, double widthTrap, double heightTrap, double stroke) {
         this.widthRect=widthRect;
@@ -114,7 +121,7 @@ public class Bottle extends Group {
     private final double a_trap;
 
     /**
-     * Aktualisiert den sichtbaren Farbverlauf
+     * Aktualisiert den sichtbaren Farbverlauf und die Position des Ist-Labels
      */
     private void setPercent() {
         double a_p = (double) ist/soll; //Prozentzahl der auszufüllenden Fläche
