@@ -8,7 +8,7 @@ Außerdem kann er in einer Flasche dargestellt werden, wo der bereits erzielte u
 
 Zur Installation sind zwei .jar-Dateien bereitgestellt, zu finden unter [out/artifacts](out/artifacts). Dort ist die [Graph.jar](out/artifacts/Graph.jar) und die [Bottle.jar](out/artifacts/Bottle.jar) in das gewünschte Verzeichnis zu kopieren.
 
-Beim Starten ist es erforderlich, dass java installiert ist.
+Beim Starten ist es erforderlich, dass java installiert ist. Hierbei ist es zusätzlich erforderlich, dass ein zusätzliches jdk zur Ausführung von jars mit JavaFX installiert ist.
 
 Beim Starten des Programms sucht das Programm nach einer config.ini. Dort sollten folgende Angaben gemacht werden:
 ```
