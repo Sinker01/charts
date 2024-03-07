@@ -18,6 +18,7 @@ import static java.lang.Math.sqrt;
  * <p>Die Klasse erzeugt eine Flasche mit Farbverlauf, welche je nach eingestellter Füllhöhe nicht ganz zu sehen ist.
  * Dies wird intern verwirklicht, indem zwei Flaschen erstellt werden;
  * eine im Hintergrund mit dem Farbverlauf, und eine davor welche weiß ist und die farbige in teilen überdeckt.</p>
+ * <p>Es wird 20% des oberen Platzes freigehalten, damit Arbeiten über den soll möglich ist</p>
  */
 public class Bottle extends Group {
     private final Shape clone; //Eine zweite Flasche, um die erste in Teilen abzudecken
@@ -68,7 +69,7 @@ public class Bottle extends Group {
         Rectangle rectangle = new Rectangle(xRect, yRect, widthRect, this.heightRect);
 
         sollLabel.setTranslateX(xRect -150-stroke);
-        sollLabel.setTranslateY(yRect);
+        sollLabel.setTranslateY(heightRect+heightTrap-calcHeight(0.8)-stroke);
         sollLabel.setFont(new Font(30));
         sollLabel.setStyle("-fx-font-weight: bold");
 
@@ -80,9 +81,13 @@ public class Bottle extends Group {
         Shape combinedShape = Shape.union(triangle, rectangle);
         clone = Shape.union(combinedShape, combinedShape);
 
+        double v = calcHeight(0.4) / (heightRect+heightTrap);
+        double v1 = calcHeight(0.8) / (heightRect+heightTrap);
         LinearGradient gradient = new LinearGradient(widthRect/2, 0, widthRect/2, this.heightRect+heightTrap, false, null,
-                new Stop(0.0, Color.GREEN),
-                new Stop(1, Color.RED));
+                new Stop(0., Color.TURQUOISE),
+                new Stop(1-v1, Color.GREEN),
+                new Stop(1-v, Color.YELLOW),
+                new Stop(1., Color.RED));
 
         combinedShape.setFill(gradient);
         istLabel.setTextFill(Color.BLUE);
@@ -121,18 +126,28 @@ public class Bottle extends Group {
     private final double a_trap;
 
     /**
+     * Berechnet die Höhe des Füllstandes abhängig von Breite und Höhe der Flasche
+     * @param percent Prozent der Fläche, welche ausgefüllt werden soll
+     * @return Die Füllhöhe der Flasche
+     */
+    private double calcHeight(double percent) {
+        return (percent<fallunterscheidung) ?
+                h_d - sqrt(h_d * (h_d - 2 * (percent * a_ges) / (2 * widthTrap + widthRect))) : //Fall 1: Nur Teile des Trapezes ausfüllen
+                heightTrap + ((percent * a_ges) - a_trap) / widthRect;  //Fall 2: Das ganze Trapez und Teile des Rechtecks ausfüllen
+    }
+
+    /**
      * Aktualisiert den sichtbaren Farbverlauf und die Position des Ist-Labels
      */
     private void setPercent() {
-        double a_p = (double) ist/soll; //Prozentzahl der auszufüllenden Fläche
+        double a_p = ist / (soll * 1.2); //Prozentzahl der auszufüllenden Fläche
+        if(a_p>1) a_p = 1;
 
-        double h_p; //Höhe, welche auszufüllen ist
+        double h_p = calcHeight(a_p); //Höhe, welche auszufüllen ist
         if(a_p < fallunterscheidung) { //Fall 1: Nur Teile des Trapezes ausfüllen
-            h_p = h_d - sqrt(h_d * (h_d - 2 * (a_p * a_ges) / (2 * widthTrap + widthRect)));
             istLabel.setTranslateX(250+ stroke + widthRect+ widthTrap - widthTrap*(h_p/heightTrap));
         }
         else { //Fall 2: Das ganze Trapez und Teile des Rechtecks ausfüllen
-            h_p = heightTrap + ((a_p * a_ges) - a_trap) / widthRect;
             istLabel.setTranslateX(250+ stroke + widthRect);
         }
         istLabel.setTranslateY(heightRect+heightTrap-h_p-stroke);
